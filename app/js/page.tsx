@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
+
 import { CodePlayground } from "@/components/playground/code-playground";
+
+export const metadata: Metadata = {
+  title: "Javascript"
+};
 
 const DEFAULT_CODE = `function fibonacci(n) {
   if (n <= 1) return n

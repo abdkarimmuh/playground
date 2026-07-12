@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
+
 import { CodePlayground } from "@/components/playground/code-playground";
+
+export const metadata: Metadata = {
+  title: "Typescript"
+};
 
 const DEFAULT_CODE = `interface User {
   name: string
