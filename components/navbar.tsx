@@ -15,7 +15,8 @@ const NAV_LINKS = [
   { href: "/ts", label: "TypeScript" },
   { href: "/py", label: "Python" },
   { href: "/rb", label: "Ruby" },
-  { href: "/go", label: "Go" }
+  { href: "/go", label: "Go" },
+  { href: "/php", label: "PHP" }
 ];
 
 export function Navbar() {

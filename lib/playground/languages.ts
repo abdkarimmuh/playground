@@ -4,11 +4,12 @@ import type { editor } from "monaco-editor";
 import type { ConsoleLevel } from "./sandbox/bridge";
 import { buildGoSandboxSrcDoc } from "./sandbox/go";
 import { buildJavaScriptSandboxSrcDoc } from "./sandbox/javascript";
+import { buildPhpSandboxSrcDoc } from "./sandbox/php";
 import { buildPythonSandboxSrcDoc } from "./sandbox/python";
 import { buildRubySandboxSrcDoc } from "./sandbox/ruby";
 
 export type PlaygroundLanguage =
-  "javascript" | "typescript" | "python" | "ruby" | "go";
+  "javascript" | "typescript" | "python" | "ruby" | "go" | "php";
 
 export type AppendLog = (level: ConsoleLevel, text: string) => void;
 
@@ -98,5 +99,9 @@ export const LANGUAGES: Record<PlaygroundLanguage, LanguageConfig> = {
   go: {
     monacoLanguage: "go",
     buildSandboxSrcDoc: buildGoSandboxSrcDoc
+  },
+  php: {
+    monacoLanguage: "php",
+    buildSandboxSrcDoc: buildPhpSandboxSrcDoc
   }
 };

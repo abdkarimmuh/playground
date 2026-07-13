@@ -5,6 +5,7 @@ import {
   Gem,
   MonitorPlay,
   Save,
+  Server,
   Sparkles,
   Terminal
 } from "lucide-react";
@@ -51,6 +52,12 @@ const PLAYGROUNDS = [
     title: "Go",
     description:
       "Write a Go program and run it via a WebAssembly Go interpreter."
+  },
+  {
+    href: "/php",
+    icon: Server,
+    title: "PHP",
+    description: "Write PHP and run it in your browser via php-wasm."
   }
 ];
 
@@ -82,7 +89,8 @@ export default function Page() {
         </h1>
         <p className="max-w-xl text-muted-foreground">
           A small, fast playground for trying out JavaScript, TypeScript,
-          Python, Ruby, and Go snippets. Pick a language below to get started.
+          Python, Ruby, Go, and PHP snippets. Pick a language below to get
+          started.
         </p>
       </div>
 

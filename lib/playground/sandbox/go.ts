@@ -29,7 +29,13 @@ ${buildConsoleBridgeScript()}
       ConsoleStdout.lineBuffered((line) => post("log", [line])),
       ConsoleStdout.lineBuffered((line) => post("error", [line]))
     ];
-    const wasi = new WASI(["yaegi-runner", ${JSON.stringify(code)}], [], fds);
+    // browser_wasi_shim's debug tracer treats a missing/undefined "debug"
+    // option as enabled (not disabled) — confirmed by reading the shim's
+    // source — so every WASI syscall gets console.log'd with a
+    // "%c%s"/"wasi:" prefix. Our bridge's console.log override would forward
+    // that straight into the Run output as noise, so it must be disabled
+    // explicitly.
+    const wasi = new WASI(["yaegi-runner", ${JSON.stringify(code)}], [], fds, { debug: false });
 
     const instance = await WebAssembly.instantiate(module, {
       wasi_snapshot_preview1: wasi.wasiImport

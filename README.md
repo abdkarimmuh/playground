@@ -1,6 +1,6 @@
 # Code Playground
 
-A small Next.js app for trying out JavaScript, TypeScript, Python, Ruby, and Go snippets in the browser. Built with Tailwind CSS and shadcn/ui. Everything runs client-side — no backend code execution.
+A small Next.js app for trying out JavaScript, TypeScript, Python, Ruby, Go, and PHP snippets in the browser. Built with Tailwind CSS and shadcn/ui. Everything runs client-side — no backend code execution.
 
 - `/` — landing page
 - `/js` — JavaScript playground
@@ -8,6 +8,7 @@ A small Next.js app for trying out JavaScript, TypeScript, Python, Ruby, and Go 
 - `/py` — Python playground (via [Pyodide](https://pyodide.org))
 - `/rb` — Ruby playground (via [ruby.wasm](https://github.com/ruby/ruby.wasm))
 - `/go` — Go playground (a full `package main` program, interpreted by [Yaegi](https://github.com/traefik/yaegi) compiled to WebAssembly)
+- `/php` — PHP playground (via [php-wasm](https://github.com/seanmorris/php-wasm))
 
 Each playground uses a Monaco editor, runs your code in a sandboxed iframe, prints console/stdout output to a console panel, and auto-saves your code to `localStorage`.
 
