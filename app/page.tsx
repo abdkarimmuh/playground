@@ -1,4 +1,13 @@
-import { Braces, FileCode2, MonitorPlay, Save, Sparkles } from "lucide-react";
+import {
+  Binary,
+  Braces,
+  FileCode2,
+  Gem,
+  MonitorPlay,
+  Save,
+  Sparkles,
+  Terminal
+} from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +32,25 @@ const PLAYGROUNDS = [
     title: "TypeScript",
     description:
       "Write TypeScript with real type-checking, then run the compiled output."
+  },
+  {
+    href: "/py",
+    icon: Terminal,
+    title: "Python",
+    description: "Write Python and run it in your browser via Pyodide."
+  },
+  {
+    href: "/rb",
+    icon: Gem,
+    title: "Ruby",
+    description: "Write Ruby and run it in your browser via ruby.wasm."
+  },
+  {
+    href: "/go",
+    icon: Binary,
+    title: "Go",
+    description:
+      "Write a Go program and run it via a WebAssembly Go interpreter."
   }
 ];
 
@@ -50,15 +78,15 @@ export default function Page() {
     <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-16 md:px-6">
       <div className="flex flex-col items-center gap-4 text-center">
         <h1 className="text-3xl font-medium tracking-tight md:text-4xl">
-          JS / TS Playground
+          Code Playground
         </h1>
         <p className="max-w-xl text-muted-foreground">
-          A small, fast playground for trying out JavaScript and TypeScript
-          snippets. Pick a language below to get started.
+          A small, fast playground for trying out JavaScript, TypeScript,
+          Python, Ruby, and Go snippets. Pick a language below to get started.
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {PLAYGROUNDS.map((playground) => (
           <Card key={playground.href}>
             <CardHeader>

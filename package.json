@@ -10,7 +10,8 @@
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:wasm": "GOOS=wasip1 GOARCH=wasm go build -C wasm/yaegi-runner -o ../../public/wasm/yaegi-runner.wasm ."
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

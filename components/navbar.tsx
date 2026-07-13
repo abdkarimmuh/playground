@@ -12,7 +12,10 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/js", label: "JavaScript" },
-  { href: "/ts", label: "TypeScript" }
+  { href: "/ts", label: "TypeScript" },
+  { href: "/py", label: "Python" },
+  { href: "/rb", label: "Ruby" },
+  { href: "/go", label: "Go" }
 ];
 
 export function Navbar() {

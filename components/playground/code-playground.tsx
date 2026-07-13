@@ -7,13 +7,15 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
-  buildSandboxSrcDoc,
+  configureTypeScriptCompilerOptions,
+  LANGUAGES,
+  type PlaygroundLanguage
+} from "@/lib/playground/languages";
+import {
   type ConsoleLevel,
   parseSandboxMessage
-} from "@/lib/playground/run-in-sandbox";
+} from "@/lib/playground/sandbox/bridge";
 import { cn } from "@/lib/utils";
-
-export type PlaygroundLanguage = "javascript" | "typescript";
 
 interface CodePlaygroundProps {
   language: PlaygroundLanguage;
@@ -35,19 +37,6 @@ const LEVEL_CLASS: Record<ConsoleLevel, string> = {
   warn: "text-amber-600 dark:text-amber-400",
   error: "text-destructive"
 };
-
-function typeScriptCompilerOptions(monaco: Monaco) {
-  return {
-    target: monaco.languages.typescript.ScriptTarget.ES2020,
-    module: monaco.languages.typescript.ModuleKind.None,
-    esModuleInterop: true,
-    strict: true
-  };
-}
-
-function markerSeverityToLevel(monaco: Monaco, severity: number): ConsoleLevel {
-  return severity >= monaco.MarkerSeverity.Error ? "error" : "warn";
-}
 
 function readStoredCode(storageKey: string, defaultCode: string) {
   if (typeof window === "undefined") {
@@ -103,60 +92,32 @@ export function CodePlayground({
     monacoRef.current = monaco;
 
     if (language === "typescript") {
-      monaco.languages.typescript.typescriptDefaults.setCompilerOptions(
-        typeScriptCompilerOptions(monaco)
-      );
+      configureTypeScriptCompilerOptions(monaco);
     }
   };
 
   async function resolveCodeToRun(): Promise<string> {
-    if (language === "javascript") {
+    const config = LANGUAGES[language];
+    if (!config.compileToJs) {
       return code;
     }
 
     const monaco = monacoRef.current;
-    const model = editorRef.current?.getModel();
-
-    // Monaco's own typescript language service already keeps live
-    // diagnostics (the red squiggly underlines) up to date in the editor —
-    // reuse those markers instead of separately querying the TS worker,
-    // which syncs model contents to its background thread asynchronously
-    // and can race ahead of a fresh Run click.
-    if (monaco && model) {
-      const markers = monaco.editor.getModelMarkers({ resource: model.uri });
-      for (const marker of markers) {
-        const level = markerSeverityToLevel(monaco, marker.severity);
-        appendLog(
-          level,
-          `TypeScript: Line ${marker.startLineNumber}, Col ${marker.startColumn}: ${marker.message}`
-        );
-      }
+    if (!monaco) {
+      return code;
     }
 
-    try {
-      const ts = await import("typescript");
-      const result = ts.transpileModule(code, {
-        compilerOptions: {
-          target: ts.ScriptTarget.ES2020,
-          module: ts.ModuleKind.None
-        }
-      });
-      return result.outputText;
-    } catch (error) {
-      appendLog(
-        "error",
-        `Failed to compile TypeScript: ${
-          error instanceof Error ? error.message : String(error)
-        }`
-      );
-      return "";
-    }
+    return config.compileToJs(code, {
+      monaco,
+      model: editorRef.current?.getModel() ?? null,
+      appendLog
+    });
   }
 
   async function handleRun() {
     setLogs([]);
     const codeToRun = await resolveCodeToRun();
-    setSrcDoc(buildSandboxSrcDoc(codeToRun));
+    setSrcDoc(LANGUAGES[language].buildSandboxSrcDoc(codeToRun));
     setRunKey((key) => key + 1);
   }
 
@@ -195,7 +156,7 @@ export function CodePlayground({
         <div className="overflow-hidden rounded-md border">
           <Editor
             height="65vh"
-            language={language}
+            language={LANGUAGES[language].monacoLanguage}
             value={code}
             onChange={(value) => setCode(value ?? "")}
             onMount={handleEditorMount}
