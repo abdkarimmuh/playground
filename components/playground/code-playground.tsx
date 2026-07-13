@@ -133,8 +133,8 @@ export function CodePlayground({
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 p-4 md:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-4 p-4 md:p-6">
+      <div className="flex flex-col gap-3">
         <div>
           <h1 className="text-lg font-medium">{title}</h1>
           <p className="text-sm text-muted-foreground">{description}</p>
@@ -152,10 +152,10 @@ export function CodePlayground({
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid min-h-[50vh] flex-1 gap-4 md:grid-cols-2">
         <div className="overflow-hidden rounded-md border">
           <Editor
-            height="65vh"
+            height="100%"
             language={LANGUAGES[language].monacoLanguage}
             value={code}
             onChange={(value) => setCode(value ?? "")}
@@ -170,7 +170,7 @@ export function CodePlayground({
           />
         </div>
 
-        <div className="flex h-[65vh] flex-col overflow-hidden rounded-md border bg-card">
+        <div className="flex flex-1 flex-col overflow-hidden rounded-md border bg-card">
           <div className="border-b px-3 py-2 text-xs font-medium text-muted-foreground">
             Console
           </div>
