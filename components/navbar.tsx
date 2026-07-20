@@ -25,7 +25,7 @@ export function Navbar() {
   const mounted = useIsClient();
 
   return (
-    <header className="sticky top-0 z-10 border-b bg-background/80 backdrop-blur">
+    <header className="bg-background/80 sticky top-0 z-10 border-b backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-medium">
           <Code2 className="size-5" />

@@ -87,7 +87,7 @@ export default function Page() {
         <h1 className="text-3xl font-medium tracking-tight md:text-4xl">
           Code Playground
         </h1>
-        <p className="max-w-xl text-muted-foreground">
+        <p className="text-muted-foreground max-w-xl">
           A small, fast playground for trying out JavaScript, TypeScript,
           Python, Ruby, Go, and PHP snippets. Pick a language below to get
           started.
@@ -117,9 +117,9 @@ export default function Page() {
       <div className="grid gap-6 sm:grid-cols-3">
         {FEATURES.map((feature) => (
           <div key={feature.title} className="flex flex-col gap-2">
-            <feature.icon className="size-5 text-muted-foreground" />
+            <feature.icon className="text-muted-foreground size-5" />
             <h2 className="font-medium">{feature.title}</h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               {feature.description}
             </p>
           </div>

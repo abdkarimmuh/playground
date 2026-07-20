@@ -137,7 +137,7 @@ export function CodePlayground({
       <div className="flex flex-col gap-3">
         <div>
           <h1 className="text-lg font-medium">{title}</h1>
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-muted-foreground text-sm">{description}</p>
         </div>
         <div className="flex items-center gap-2">
           <Button size="sm" onClick={handleRun}>
@@ -170,8 +170,8 @@ export function CodePlayground({
           />
         </div>
 
-        <div className="flex flex-1 flex-col overflow-hidden rounded-md border bg-card">
-          <div className="border-b px-3 py-2 text-xs font-medium text-muted-foreground">
+        <div className="bg-card flex flex-1 flex-col overflow-hidden rounded-md border">
+          <div className="text-muted-foreground border-b px-3 py-2 text-xs font-medium">
             Console
           </div>
           <div className="flex-1 overflow-auto p-3 font-mono text-xs">
