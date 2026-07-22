@@ -1,17 +1,17 @@
 export function Footer() {
   return (
-    <footer className="border-t">
-      <div className="text-muted-foreground mx-auto max-w-6xl items-center px-4 py-6 text-center text-sm md:px-6">
+    <footer className="mt-auto border-t px-6 py-4 text-center text-xs">
+      <span className="text-muted-foreground">
         © {new Date().getFullYear()} created by{" "}
-        <a
-          href="https://abdkarim.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-foreground font-bold underline-offset-4 hover:underline"
-        >
-          Muhammad Abdul Karim
-        </a>
-      </div>
+      </span>
+      <a
+        href="https://abdkarim.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-foreground font-bold underline-offset-4 hover:underline"
+      >
+        Muhammad Abdul Karim
+      </a>
     </footer>
   );
 }
