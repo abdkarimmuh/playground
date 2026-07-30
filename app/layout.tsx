@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ReactNode } from "react";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
@@ -25,7 +26,7 @@ const fontMono = Geist_Mono({
 export default function RootLayout({
   children
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html
@@ -42,7 +43,9 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="flex min-h-svh flex-col">
             <Navbar />
-            <main className="flex flex-1 flex-col">{children}</main>
+            <main className="flex flex-1 flex-col bg-slate-100">
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProvider>

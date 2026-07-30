@@ -3,7 +3,7 @@
 import Editor, { type Monaco, type OnMount } from "@monaco-editor/react";
 import { Eraser, Play, RotateCcw } from "lucide-react";
 import { useTheme } from "next-themes";
-import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -53,29 +53,29 @@ export function CodePlayground({
   description
 }: CodePlaygroundProps) {
   const { resolvedTheme } = useTheme();
-  const [code, setCode] = React.useState(() =>
+  const [code, setCode] = useState(() =>
     readStoredCode(storageKey, defaultCode)
   );
-  const [logs, setLogs] = React.useState<LogEntry[]>([]);
-  const [srcDoc, setSrcDoc] = React.useState("");
-  const [runKey, setRunKey] = React.useState(0);
+  const [logs, setLogs] = useState<LogEntry[]>([]);
+  const [srcDoc, setSrcDoc] = useState("");
+  const [runKey, setRunKey] = useState(0);
 
-  const monacoRef = React.useRef<Monaco | null>(null);
-  const editorRef = React.useRef<Parameters<OnMount>[0] | null>(null);
-  const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
+  const monacoRef = useRef<Monaco | null>(null);
+  const editorRef = useRef<Parameters<OnMount>[0] | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  const appendLog = React.useCallback((level: ConsoleLevel, text: string) => {
+  const appendLog = useCallback((level: ConsoleLevel, text: string) => {
     setLogs((prev) => [...prev, { id: crypto.randomUUID(), level, text }]);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       window.localStorage.setItem(storageKey, code);
     }, 300);
     return () => clearTimeout(timeout);
   }, [code, storageKey]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function onMessage(event: MessageEvent) {
       if (event.source !== iframeRef.current?.contentWindow) return;
       const message = parseSandboxMessage(event.data);

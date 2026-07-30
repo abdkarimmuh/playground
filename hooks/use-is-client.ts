@@ -1,11 +1,11 @@
-import * as React from "react";
+import { useSyncExternalStore } from "react";
 
 function subscribe() {
   return () => {};
 }
 
 export function useIsClient() {
-  return React.useSyncExternalStore(
+  return useSyncExternalStore(
     subscribe,
     () => true,
     () => false

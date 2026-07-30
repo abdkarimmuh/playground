@@ -1,14 +1,4 @@
-import {
-  Binary,
-  Braces,
-  FileCode2,
-  Gem,
-  MonitorPlay,
-  Save,
-  Server,
-  Sparkles,
-  Terminal
-} from "lucide-react";
+import { Binary, Braces, FileCode2, Gem, Server, Terminal } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -61,28 +51,9 @@ const PLAYGROUNDS = [
   }
 ];
 
-const FEATURES = [
-  {
-    icon: MonitorPlay,
-    title: "Runs in your browser",
-    description: "No server round-trip — code executes in a sandboxed iframe."
-  },
-  {
-    icon: Sparkles,
-    title: "Monaco editor",
-    description:
-      "The same editor that powers VS Code, with syntax highlighting and diagnostics."
-  },
-  {
-    icon: Save,
-    title: "Auto-saved locally",
-    description: "Your code is saved to localStorage so it survives a refresh."
-  }
-];
-
 export default function Page() {
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-16 md:px-6">
+    <div className="flex h-full w-full flex-1 flex-col items-center justify-center gap-16 px-4 py-16 md:px-6">
       <div className="flex flex-col items-center gap-4 text-center">
         <h1 className="text-3xl font-medium tracking-tight md:text-4xl">
           Code Playground
@@ -94,7 +65,7 @@ export default function Page() {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {PLAYGROUNDS.map((playground) => (
           <Card key={playground.href}>
             <CardHeader>
@@ -111,18 +82,6 @@ export default function Page() {
               </Button>
             </CardFooter>
           </Card>
-        ))}
-      </div>
-
-      <div className="grid gap-6 sm:grid-cols-3">
-        {FEATURES.map((feature) => (
-          <div key={feature.title} className="flex flex-col gap-2">
-            <feature.icon className="text-muted-foreground size-5" />
-            <h2 className="font-medium">{feature.title}</h2>
-            <p className="text-muted-foreground text-sm">
-              {feature.description}
-            </p>
-          </div>
         ))}
       </div>
     </div>
